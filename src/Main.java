@@ -36,6 +36,26 @@ public class Arvore_Binaria{
         }
         return atual;
     }
+    //funcao buscar elemento
+    public Node buscar(int info){
+        Node atual = raiz;
+        while(atual != null && atual.getInfo() != info){
+            if(info < atual.info){
+                atual = atual.getEsquerda();
+            }
+            else{
+                atual = atual.getDireita();
+            }
+        }
+
+        if(atual != null){
+            System.out.println("Encontrado o elemento: " + atual.getInfo());
+        }
+        else{
+            System.out.println("Elemento não encontrado");
+        }
+        return atual;
+    }
 
 }
 
