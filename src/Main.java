@@ -56,6 +56,45 @@ public class Arvore_Binaria{
         }
         return atual;
     }
+// Criterio: menor elemento da subarvore direita (sucessor in-ordem).
+    public void removeElemento(int elemento) {
+        if (existe(elemento) == false) {
+            System.out.println("Elemento nao encontrado: " + elemento);
+            return;
+        }
+        raiz = remove(raiz, elemento);
+        System.out.println("Removido: " + elemento);
+    }
+
+    private No remove(No no, int elemento) {
+        if (no == null) {
+            return null;
+        }
+
+        if (elemento < no.dado) {
+            no.esquerda = remove(no.esquerda, elemento);
+        } else if (elemento > no.dado) {
+            no.direita = remove(no.direita, elemento);
+        } else {
+            // Achou o no a remover
+
+            // Caso 1 e 2: nenhum filho ou um filho so
+            if (no.esquerda == null) {
+                return no.direita;
+            }
+            if (no.direita == null) {
+                return no.esquerda;
+            }
+
+            // Caso 3: dois filhos
+            // Copia o menor valor da subarvore direita para este no
+            int substituto = menorValor(no.direita);
+            no.dado = substituto;
+            // e apaga o substituto da posicao antiga dele
+            no.direita = remove(no.direita, substituto);
+        }
+        return no;
+    }
 
 }
 
